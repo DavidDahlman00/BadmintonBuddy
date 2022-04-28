@@ -10,12 +10,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BadmintonBuddy">
         <activity
-            android:name=".login.LoginActivity"
-
+            android:name=".main.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".StartActivity"
-
+            android:name=".login.LoginActivity"
+            android:exported="false"
+            android:parentActivityName=".login.LoginActivity" />
+        <activity
+            android:name=".start.StartActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

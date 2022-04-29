@@ -1,4 +1,4 @@
-package duiban.badmintonbuddy.login
+package duiban.badmintonbuddy.ui.login
 
 import android.app.ActivityOptions
 import android.content.Context
@@ -24,7 +24,7 @@ class LoginFragment : Fragment() {
         val binding = FragmentLoginBinding.bind(view)
         loginFragmentLoginBinding = binding
 
-        binding.loginText.setOnClickListener {
+        binding.loginButton.setOnClickListener {
             gotoMainscreen(this.requireContext())
         }
 

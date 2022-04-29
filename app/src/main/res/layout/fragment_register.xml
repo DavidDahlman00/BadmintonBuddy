@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".login.RegisterFragment">
+    tools:context=".ui.login.RegisterFragment">
 
     <LinearLayout
         android:id="@+id/register_linear_layout"
@@ -140,6 +140,12 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:text="" />
+
+        <Button
+            android:id="@+id/register_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button" />
 
     </LinearLayout>
 </FrameLayout>

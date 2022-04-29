@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFC107"
-    tools:context=".login.LoginFragment">
+    tools:context=".ui.login.LoginFragment">
     <LinearLayout
         android:id="@+id/login_linearLayout"
         android:layout_width="match_parent"
@@ -110,8 +109,8 @@
             android:text=""
             android:textColor="#F44336" />
 
-        <TextView
-            android:id="@+id/login_text"
+        <Button
+            android:id="@+id/login_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="login" />

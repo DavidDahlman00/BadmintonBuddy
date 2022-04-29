@@ -12,6 +12,8 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_start.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.17798913043478262" />
+        <entry key="app/src/main/res/layout/fragment_my_games.xml" value="0.1331521739130435" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.1331521739130435" />
         <entry key="app/src/main/res/layout/fragment_register.xml" value="0.17798913043478262" />
         <entry key="app/src/main/res/layout/fragment_start.xml" value="0.1" />
         <entry key="app/src/main/res/menu/login_menu.xml" value="0.21927083333333333" />

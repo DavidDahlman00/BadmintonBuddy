@@ -10,7 +10,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BadmintonBuddy">
         <activity
-            android:name=".MainActivity"
+            android:name=".main.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name="duiban.badmintonbuddy.ui.login.LoginActivity"
+            android:exported="false"
+            android:parentActivityName="duiban.badmintonbuddy.ui.login.LoginActivity" />
+        <activity
+            android:name=".start.StartActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

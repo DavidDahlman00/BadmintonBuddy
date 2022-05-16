@@ -10,7 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import duiban.badmintonbuddy.R
 import duiban.badmintonbuddy.databinding.FragmentRegisterBinding
-import duiban.badmintonbuddy.main.MainActivity
+import duiban.badmintonbuddy.ui.main.MainActivity
 
 
 class RegisterFragment() : Fragment() {

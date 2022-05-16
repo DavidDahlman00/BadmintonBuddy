@@ -10,8 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BadmintonBuddy">
         <activity
-            android:name=".main.MainActivity"
-            android:exported="false" />
+            android:name="duiban.badmintonbuddy.ui.main.MainActivity"
+            android:exported="false"
+            android:parentActivityName="duiban.badmintonbuddy.ui.main.MainActivity" />
         <activity
             android:name="duiban.badmintonbuddy.ui.login.LoginActivity"
             android:exported="false"

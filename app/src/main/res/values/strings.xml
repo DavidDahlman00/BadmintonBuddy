@@ -7,4 +7,6 @@
     <string name="profile">Profile</string>
     <string name="my_games">My Games</string>
     <string name="find_games">search new match</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="are_you_sure_you_want_to_sign_out">Are you sure you want to sign out</string>
 </resources>

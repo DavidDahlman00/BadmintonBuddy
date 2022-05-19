@@ -26,8 +26,7 @@ class RegisterFragment() : Fragment() {
 
     private var registerBinding : FragmentRegisterBinding?= null
     private lateinit var auth: FirebaseAuth
-   // private val auth = FirebaseAuth.getInstance()
-   private val db = Firebase.firestore
+    private val db = Firebase.firestore
     private lateinit var email: EditText
     private lateinit var userName: EditText
     private lateinit var password: EditText
@@ -73,7 +72,10 @@ class RegisterFragment() : Fragment() {
         registerBinding = null
     }
     private fun gotoMainscreen(context: Context) {
-        val bundle = ActivityOptions.makeCustomAnimation(context, android.R.anim.slide_in_left, android.R.anim.slide_out_right).toBundle()
+        val bundle = ActivityOptions.makeCustomAnimation(context,
+            android.R.anim.slide_in_left,
+            android.R.anim.slide_out_right)
+            .toBundle()
         val intent = Intent(context, MainActivity::class.java)
         context.startActivity(intent, bundle)
     }
@@ -100,12 +102,12 @@ class RegisterFragment() : Fragment() {
                     put("name", username)
                     put("password", password)
                     put("email", email)
+                    put("profileImage", "")
                 }
 
                 db.collection("users")
-                    //.document(userID)
-                    //.set(newUser)
-                    .add(newUser)
+                    .document(userID)
+                    .set(newUser)
                     .addOnSuccessListener {
                         Log.d("222", "DocumentSnapshot added with ID:")
                         gotoMainscreen(this.requireContext())

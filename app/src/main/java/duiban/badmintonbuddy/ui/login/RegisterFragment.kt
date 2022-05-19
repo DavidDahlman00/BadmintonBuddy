@@ -14,11 +14,11 @@ import android.view.ViewGroup
 import android.widget.EditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import duiban.badmintonbuddy.R
 import duiban.badmintonbuddy.databinding.FragmentRegisterBinding
-import duiban.badmintonbuddy.models.User
 import duiban.badmintonbuddy.ui.main.MainActivity
 
 
@@ -26,11 +26,13 @@ class RegisterFragment() : Fragment() {
 
     private var registerBinding : FragmentRegisterBinding?= null
     private lateinit var auth: FirebaseAuth
-    val db = Firebase.firestore
+   // private val auth = FirebaseAuth.getInstance()
+   private val db = Firebase.firestore
     private lateinit var email: EditText
     private lateinit var userName: EditText
     private lateinit var password: EditText
     private var showPassword = false
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,7 +46,9 @@ class RegisterFragment() : Fragment() {
         password = binding.registereditTextTextPassword
         userName = binding.registertextUsername
         password.requestFocus()
+        val currentUser = auth.currentUser
 
+        Log.d("??",auth.currentUser.toString())
         binding.imageeye.setOnClickListener {
             if (showPassword){
                 binding.imageeye.setImageResource(R.drawable.ic_eye)
@@ -78,27 +82,38 @@ class RegisterFragment() : Fragment() {
         val username = userName.text.trim{it <= ' '}.toString()
         val email = email.text.trim{it <= ' '}.toString()
         val password = password.text.trim{it <= ' '}.toString()
-
+        Log.d("???","test register")
+        Log.d("test22", username )
+        Log.d("test22", email )
+        Log.d("test22", password )
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+            Log.d("111", task.toString())
             if (task.isSuccessful) {
                 val userID = task.result?.user?.uid.toString()
-                val newUser =
-                    User(id = userID, name = username, email = email, password = password)
+                Log.d("test22", userID )
+                Log.d("test22", username )
+                Log.d("test22", email )
+                Log.d("test22", password )
+                val newUser = hashMapOf<String, Any>()
+                with(newUser) {
+                    put("id", userID)
+                    put("name", username)
+                    put("password", password)
+                    put("email", email)
+                }
 
-
-                db.collection("Users").document(userID).set(newUser)
-                    .addOnCompleteListener {
-                        Log.d("!!!", "$username successfully registerd")
-
-
-                    }.addOnFailureListener {
-                        Log.d("!!!", "failed to registerd")
+                db.collection("users")
+                    //.document(userID)
+                    //.set(newUser)
+                    .add(newUser)
+                    .addOnSuccessListener {
+                        Log.d("222", "DocumentSnapshot added with ID:")
+                        gotoMainscreen(this.requireContext())
+                    }.addOnFailureListener { e ->
+                        Log.w("222", "Error adding document", e)
                     }
-
-                gotoMainscreen(this.requireContext())
-
-            } else {
-                Log.d("!!!", "failed to register")
+            }else {
+                Log.w("222", "Error auth")
             }
         }
     }

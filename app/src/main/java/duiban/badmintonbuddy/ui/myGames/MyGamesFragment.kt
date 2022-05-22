@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import duiban.badmintonbuddy.R
 import duiban.badmintonbuddy.databinding.FragmentMyGamesBinding
+import duiban.badmintonbuddy.ui.myGames.CreateGameDialogFragment
 
 class MyGamesFragment : Fragment() {
 
@@ -19,6 +20,11 @@ class MyGamesFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_my_games, container, false)
         val binding = FragmentMyGamesBinding.bind(view)
         myGamesBinding = binding
+        myGamesBinding?.newgamebtn?.setOnClickListener {
+            val createGameDialogFragment = CreateGameDialogFragment()
+            createGameDialogFragment.show(parentFragmentManager, "createGameDialogFragment")
+
+        }
         return view
     }
 

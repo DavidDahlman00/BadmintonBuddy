@@ -18,23 +18,18 @@
             android:text="where" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName"
+            android:id="@+id/editTextTextPlace"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name" />
+            android:inputType="textPersonName" />
 
-        <TextView
-            android:id="@+id/timetext"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="when" />
 
         <Button
             android:id="@+id/btn_timePicker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="?android:attr/buttonBarButtonStyle"
             android:text="@string/chosetimebuttontext"
             />
         <TextView
@@ -69,11 +64,29 @@
                 android:text="4 players" />
         </RadioGroup>
 
-        <Button
-            android:id="@+id/create_game_btn"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Create game" />
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/cancel_btn"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_weight="1"
+                android:text="Cancel" />
+
+            <Button
+                android:id="@+id/create_game_btn"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_weight="1"
+                android:text="Create game" />
+        </LinearLayout>
 
     </LinearLayout>
 </FrameLayout>

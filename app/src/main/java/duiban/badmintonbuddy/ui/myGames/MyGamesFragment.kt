@@ -23,7 +23,6 @@ class MyGamesFragment : Fragment() {
         myGamesBinding?.newgamebtn?.setOnClickListener {
             val createGameDialogFragment = CreateGameDialogFragment()
             createGameDialogFragment.show(parentFragmentManager, "createGameDialogFragment")
-
         }
         return view
     }

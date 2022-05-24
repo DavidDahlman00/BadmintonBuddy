@@ -1,23 +1,31 @@
 package duiban.badmintonbuddy.ui.findGames
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import duiban.badmintonbuddy.R
 import duiban.badmintonbuddy.models.Game
 import duiban.badmintonbuddy.models.User
 import duiban.badmintonbuddy.models.UserObject
 
-class FindGamesAdapter(): RecyclerView.Adapter<FindGamesAdapter.ViewHolder>() {
+class FindGamesAdapter(fragment : Fragment): RecyclerView.Adapter<FindGamesAdapter.ViewHolder>() {
+
+    val fragment = fragment
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FindGamesAdapter.ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.searchgameitem, parent, false)
         return ViewHolder(v)
     }
 
     override fun onBindViewHolder(holder: FindGamesAdapter.ViewHolder, position: Int) {
-        val game = UserObject.gamesList[position]
+        val filterGames = UserObject.gamesList.filter { it.players[0] != UserObject.thisUser.id }
+        val game = filterGames[position]
+        holder.game = game
         holder.itemPlace.text = game.where
         holder.itemTime.text = "${game.year}:${game.month}:${game.day} - ${game.hour}:${game.min}"
         holder.itemPlayer1.text = findPlayerOrEmpty(game, 0)
@@ -33,14 +41,14 @@ class FindGamesAdapter(): RecyclerView.Adapter<FindGamesAdapter.ViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        return UserObject.gamesList.size
+        return  UserObject.gamesList.filter { it.players[0] != UserObject.thisUser.id }.size//UserObject.gamesList.size
     }
 
     private fun findPlayerOrEmpty(game: Game,pos : Int) : String{
         if (game.players.size > pos){
             return game.players[pos]
         }else{
-            return "Empty"
+            return "open"
         }
     }
 
@@ -54,11 +62,30 @@ class FindGamesAdapter(): RecyclerView.Adapter<FindGamesAdapter.ViewHolder>() {
     }*/
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+
         var itemTime: TextView = itemView.findViewById(R.id.searchitemtimetext)
         var itemPlace: TextView = itemView.findViewById(R.id.searchitemplacetext)
         var itemPlayer1: TextView = itemView.findViewById(R.id.searchitemplayer1_btn)
         var itemPlayer2: TextView = itemView.findViewById(R.id.searchitemplayer2_btn)
         var itemPlayer3: TextView = itemView.findViewById(R.id.searchitemplayer3_btn)
         var itemPlayer4: TextView = itemView.findViewById(R.id.searchitemplayer4_btn)
+        lateinit var game : Game
+        init {
+                itemPlayer2.setOnClickListener {
+                    if ((itemPlayer2.text == "open") && (itemPlayer1.text != UserObject.thisUser.id)){
+                        Log.d("yes", "is clicked")
+                        val askToJoinDialog = AskToJoinGameDialogFragment(game)
+                        askToJoinDialog.show(fragment.parentFragmentManager, "askToJoinDialog")
+                    }
+                }
+
+            if (itemPlayer1.text == "open"){
+                itemPlayer1.setOnClickListener {
+                    Log.d("yes", "is clicked")
+                }
+            }
+
+
+        }
     }
 }

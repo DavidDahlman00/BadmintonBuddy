@@ -28,7 +28,7 @@ class FindGamesFragment : Fragment() {
         findGamesBinding = binding
         recyclerView = findGamesBinding!!.findgamerecycler
         recyclerView.layoutManager = LinearLayoutManager(this.requireContext())
-        adapter = FindGamesAdapter()
+        adapter = FindGamesAdapter(this)
         recyclerView.adapter = adapter
         return view
     }

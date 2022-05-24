@@ -1,10 +1,13 @@
 package duiban.badmintonbuddy.ui.findGames
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
@@ -69,23 +72,58 @@ class FindGamesAdapter(fragment : Fragment): RecyclerView.Adapter<FindGamesAdapt
         var itemPlayer2: TextView = itemView.findViewById(R.id.searchitemplayer2_btn)
         var itemPlayer3: TextView = itemView.findViewById(R.id.searchitemplayer3_btn)
         var itemPlayer4: TextView = itemView.findViewById(R.id.searchitemplayer4_btn)
+
         lateinit var game : Game
         init {
                 itemPlayer2.setOnClickListener {
-                    if ((itemPlayer2.text == "open") && (itemPlayer1.text != UserObject.thisUser.id)){
-                        Log.d("yes", "is clicked")
-                        val askToJoinDialog = AskToJoinGameDialogFragment(game)
-                        askToJoinDialog.show(fragment.parentFragmentManager, "askToJoinDialog")
+                    if(hasAlreadyAsked()){
+                        Log.d("toaast", "toast!?")
+                        showHasAlreadyAsked()
+                    }else{
+                        asktoJoinGame(itemPlayer2.text.toString())
+                    }
+                }
+                itemPlayer3.setOnClickListener {
+                    if(hasAlreadyAsked()){
+                        showHasAlreadyAsked()
+                    }else{
+                        asktoJoinGame(itemPlayer3.text.toString())
+                    }
+                }
+                itemPlayer4.setOnClickListener {
+                    if(hasAlreadyAsked()){
+                        showHasAlreadyAsked()
+                    }else{
+                        asktoJoinGame(itemPlayer4.text.toString())
                     }
                 }
 
-            if (itemPlayer1.text == "open"){
-                itemPlayer1.setOnClickListener {
-                    Log.d("yes", "is clicked")
-                }
             }
 
+        private fun asktoJoinGame(buttonText : String){
+            if ((buttonText == "open") && (itemPlayer1.text != UserObject.thisUser.id)){
+                Log.d("yes", "is clicked")
+                val askToJoinDialog = AskToJoinGameDialogFragment(game)
+                askToJoinDialog.show(fragment.parentFragmentManager, "askToJoinDialog")
+            }
+        }
 
+        private fun hasAlreadyAsked() : Boolean {
+            return game.intrested.contains(UserObject.thisUser.id)
+        }
+
+        private fun showHasAlreadyAsked(){
+            val dialogBuilder = AlertDialog.Builder(fragment.requireContext())
+
+            dialogBuilder.setMessage("")
+                .setCancelable(false)
+                .setPositiveButton("Ok", DialogInterface.OnClickListener {
+                        dialog, id -> dialog.cancel()
+                })
+
+            val alert = dialogBuilder.create()
+            alert.setTitle("You have already asked to join this match")
+            alert.show()
         }
     }
 }

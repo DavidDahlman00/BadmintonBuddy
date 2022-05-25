@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         val view = mainBinding.root
         setContentView(view)
         switchFragment(profileFragment)
-        loadGamesList()
+
         mainBinding.mainBottomNav.setOnItemSelectedListener { item ->
             when(item.itemId){
                 R.id.find_games_link -> switchFragment(findGamesFragment)
@@ -40,20 +40,6 @@ class MainActivity : AppCompatActivity() {
             val signOutDialog = SignOutDialogFragment()
             signOutDialog.show(supportFragmentManager, "SignOutDialogFragment")
             Log.d("222", "logout")
-        }
-    }
-
-    private fun loadGamesList() {
-        db.collection("game").addSnapshotListener { value, error ->
-            if (value != null) {
-                Log.d("message data length", value.size().toString())
-                UserObject.gamesList.clear()
-                for (document in value!!) {
-                    Log.d("message data", document.toString())
-                    val newItem = document.toObject(Game::class.java)
-                    UserObject.gamesList.add(newItem)
-                }
-            }
         }
     }
 

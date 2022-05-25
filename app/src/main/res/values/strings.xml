@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">BadmintonBuddy</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login">Logga in</string>
+    <string name="register">Registrera</string>
+    <string name="profile">Profile</string>
+    <string name="my_games">My Games</string>
+    <string name="find_games">search new match</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="are_you_sure_you_want_to_sign_out">Are you sure you want to sign out</string>
+    <string name="chosetimebuttontext">when</string>
+    <string name="new_game_btn">new game</string>
 </resources>

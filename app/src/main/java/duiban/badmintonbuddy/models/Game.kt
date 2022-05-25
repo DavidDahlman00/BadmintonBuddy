@@ -1,6 +1,7 @@
 package duiban.badmintonbuddy.models
 
 import java.util.*
+import kotlin.collections.HashMap
 
 class Game( var id: String = "",
             var where: String = "",
@@ -10,8 +11,8 @@ class Game( var id: String = "",
             var hour: Int = 0,
             var min: Int = 0,
             var numPlayers: Int = 2,
-            var players: MutableList<String> = mutableListOf(),
-            var intrested: MutableList<String> = mutableListOf()
+            var players: MutableList<HashMap<String, String>> = mutableListOf(),
+            var intrest: MutableList<HashMap<String, String>> = mutableListOf()
         )
     {
 

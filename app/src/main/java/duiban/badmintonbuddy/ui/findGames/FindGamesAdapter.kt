@@ -26,7 +26,7 @@ class FindGamesAdapter(fragment : Fragment): RecyclerView.Adapter<FindGamesAdapt
     }
 
     override fun onBindViewHolder(holder: FindGamesAdapter.ViewHolder, position: Int) {
-        val filterGames = UserObject.gamesList.filter { it.players[0] != UserObject.thisUser.id }
+        val filterGames = UserObject.gamesList.filter { it.players[0].getValue("id") != UserObject.thisUser.id }
         val game = filterGames[position]
         holder.game = game
         holder.itemPlace.text = game.where
@@ -44,25 +44,16 @@ class FindGamesAdapter(fragment : Fragment): RecyclerView.Adapter<FindGamesAdapt
     }
 
     override fun getItemCount(): Int {
-        return  UserObject.gamesList.filter { it.players[0] != UserObject.thisUser.id }.size//UserObject.gamesList.size
+        return  UserObject.gamesList.filter { it.players[0].getValue("id") != UserObject.thisUser.id }.size//UserObject.gamesList.size
     }
 
     private fun findPlayerOrEmpty(game: Game,pos : Int) : String{
         if (game.players.size > pos){
-            return game.players[pos]
+            return game.players[pos].getValue("name")
         }else{
             return "open"
         }
     }
-
-   /* private fun getplayer(id : String): User? {
-        if (id == "") {
-            return null
-        }else{
-            return UserObject.
-        }
-
-    }*/
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
 
@@ -109,7 +100,12 @@ class FindGamesAdapter(fragment : Fragment): RecyclerView.Adapter<FindGamesAdapt
         }
 
         private fun hasAlreadyAsked() : Boolean {
-            return game.intrested.contains(UserObject.thisUser.id)
+            val thisPlayersMap = HashMap<String, String>()
+            with(thisPlayersMap){
+                put("id", UserObject.thisUser.id)
+                put("name", UserObject.thisUser.name)
+            }
+            return game.intrest.contains(thisPlayersMap)
         }
 
         private fun showHasAlreadyAsked(){

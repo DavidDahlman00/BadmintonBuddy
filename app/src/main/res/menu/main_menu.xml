@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/profile_link"
+        android:icon="@drawable/ic_person_link"
+        android:title="@string/profile" />
+    <item
         android:id="@+id/find_games_link"
         android:icon="@drawable/ic_find_game_kink"
         android:title="@string/find_games" />
@@ -8,8 +12,4 @@
         android:id="@+id/my_games_link"
         android:icon="@drawable/ic_my_games_link"
         android:title="@string/my_games" />
-    <item
-        android:id="@+id/profile_link"
-        android:icon="@drawable/ic_person_link"
-        android:title="@string/profile" />
 </menu>

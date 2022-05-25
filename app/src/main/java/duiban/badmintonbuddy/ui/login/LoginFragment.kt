@@ -54,7 +54,6 @@ class LoginFragment : Fragment() {
         }
 
         binding.loginButton.setOnClickListener {
-            // gotoMainScreen(this.requireContext())
             login()
         }
 
@@ -96,7 +95,6 @@ class LoginFragment : Fragment() {
                         }
 
                     }
-                    // Sign in success, update UI with the signed-in user's information
                     Log.d("TAG", "signInWithEmail:success")
                     gotoMainScreen(this.requireContext())
                 }

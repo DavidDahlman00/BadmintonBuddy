@@ -5,14 +5,12 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.DatePicker
 import android.widget.TimePicker
 import androidx.fragment.app.DialogFragment
-import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import duiban.badmintonbuddy.R
@@ -20,6 +18,7 @@ import duiban.badmintonbuddy.databinding.FragmentCreateGameDialogBinding
 import duiban.badmintonbuddy.models.Game
 import duiban.badmintonbuddy.models.UserObject
 import java.util.*
+import kotlin.collections.HashMap
 
 
 class CreateGameDialogFragment :  DialogFragment(), DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
@@ -74,12 +73,20 @@ class CreateGameDialogFragment :  DialogFragment(), DatePickerDialog.OnDateSetLi
 
     private fun createGame(){
         createGameDialogBinding?.createGameBtn?.setOnClickListener {
-            val playerList = mutableListOf<String>()
+            val playerList = mutableListOf<HashMap<String, String>>()
+            val thisPlayerMap = HashMap<String, String>()
+            with(thisPlayerMap){
+                put("id", UserObject.thisUser.id)
+                put("name", UserObject.thisUser.name)
+            }
+            playerList.add(thisPlayerMap)
+
             val where = createGameDialogBinding?.editTextTextPlace?.text.toString()
-            playerList.add(UserObject.thisUser.id)
+
 
             Log.d("QQQ", "did send game???")
             val gameRef = db.collection("game").document()
+
             val newGame = Game(
                 id = gameRef.id,
                 where = where,

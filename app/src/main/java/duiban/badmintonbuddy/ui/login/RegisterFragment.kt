@@ -19,6 +19,8 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import duiban.badmintonbuddy.R
 import duiban.badmintonbuddy.databinding.FragmentRegisterBinding
+import duiban.badmintonbuddy.models.User
+import duiban.badmintonbuddy.models.UserObject
 import duiban.badmintonbuddy.ui.main.MainActivity
 
 
@@ -110,6 +112,8 @@ class RegisterFragment() : Fragment() {
                     .set(newUser)
                     .addOnSuccessListener {
                         Log.d("222", "DocumentSnapshot added with ID:")
+                        val thisUser = User(userID, username, email, "")
+                        UserObject.thisUser = thisUser
                         gotoMainscreen(this.requireContext())
                     }.addOnFailureListener { e ->
                         Log.w("222", "Error adding document", e)

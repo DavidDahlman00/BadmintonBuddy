@@ -1,6 +1,7 @@
 package duiban.badmintonbuddy.ui.findGames
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.DialogFragment
 import android.view.LayoutInflater
 import android.view.View
@@ -40,9 +41,16 @@ class AskToJoinGameDialogFragment(_game : Game) : DialogFragment() {
     }
 
     private fun askToJoinGame(){
-        val intrestedList = game.intrested
-        intrestedList.add(UserObject.thisUser.id)
-        game.intrested = intrestedList
+        val intrestedList = game.intrest
+        val newIntrested = HashMap<String, String>()
+        with(newIntrested){
+            put("id", UserObject.thisUser.id)
+            put("name", UserObject.thisUser.name)
+        }
+        Log.d("222", "id ${UserObject.thisUser.id}")
+        Log.d("222", "name ${UserObject.thisUser.name}")
+        intrestedList.add(newIntrested)
+        game.intrest = intrestedList
         db.collection("game").document(game.id).set(game)
     }
 

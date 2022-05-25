@@ -1,6 +1,5 @@
 package duiban.badmintonbuddy.ui.myGames
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import duiban.badmintonbuddy.R
 import duiban.badmintonbuddy.models.Game
 import duiban.badmintonbuddy.models.UserObject
-import duiban.badmintonbuddy.ui.findGames.AskToJoinGameDialogFragment
 
 class MyGamesAdapter(fragment : Fragment): RecyclerView.Adapter<MyGamesAdapter.ViewHolder>() {
 

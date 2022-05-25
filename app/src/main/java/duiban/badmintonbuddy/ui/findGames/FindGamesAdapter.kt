@@ -26,7 +26,9 @@ class FindGamesAdapter(fragment : Fragment): RecyclerView.Adapter<FindGamesAdapt
     }
 
     override fun onBindViewHolder(holder: FindGamesAdapter.ViewHolder, position: Int) {
-        val filterGames = UserObject.gamesList.filter { it.players[0].getValue("id") != UserObject.thisUser.id }
+        val filterGames = UserObject.gamesList.
+                filter { it.players[0].getValue("id") != UserObject.thisUser.id }.
+                filter { it.run { !it.hasTimePast() } }
         val game = filterGames[position]
         holder.game = game
         holder.itemPlace.text = game.where
@@ -44,7 +46,10 @@ class FindGamesAdapter(fragment : Fragment): RecyclerView.Adapter<FindGamesAdapt
     }
 
     override fun getItemCount(): Int {
-        return  UserObject.gamesList.filter { it.players[0].getValue("id") != UserObject.thisUser.id }.size//UserObject.gamesList.size
+        return  UserObject.gamesList.
+                filter { it.players[0].getValue("id") != UserObject.thisUser.id }.
+                filter { it.run { !it.hasTimePast() } }
+                .size
     }
 
     private fun findPlayerOrEmpty(game: Game,pos : Int) : String{

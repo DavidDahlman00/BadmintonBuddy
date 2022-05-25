@@ -16,7 +16,7 @@ class Game( var id: String = "",
         )
     {
 
-    private fun hasTimePast(): Boolean {
+        fun hasTimePast(): Boolean {
         val time_now = Date(System.currentTimeMillis())
         if (time_now.year > year){
             return true

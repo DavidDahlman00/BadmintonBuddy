@@ -1,5 +1,6 @@
 package duiban.badmintonbuddy.ui.myGames
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,8 +11,12 @@ import androidx.recyclerview.widget.RecyclerView
 import duiban.badmintonbuddy.R
 import duiban.badmintonbuddy.models.Game
 import duiban.badmintonbuddy.models.UserObject
+import duiban.badmintonbuddy.ui.findGames.AskToJoinGameDialogFragment
 
 class MyGamesAdapter(fragment : Fragment): RecyclerView.Adapter<MyGamesAdapter.ViewHolder>() {
+
+    val fragment = fragment
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyGamesAdapter.ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.my_game_item, parent, false)
         return ViewHolder(view)
@@ -33,6 +38,9 @@ class MyGamesAdapter(fragment : Fragment): RecyclerView.Adapter<MyGamesAdapter.V
         }else{
             holder.itemPlayer3.visibility = View.GONE
             holder.itemPlayer4.visibility = View.GONE
+        }
+        if((game.intrest.isEmpty()) || (game.players.size >= game.numPlayers) ) {
+            holder.itemApprovePlayers.visibility = View.GONE
         }
     }
 
@@ -61,5 +69,18 @@ class MyGamesAdapter(fragment : Fragment): RecyclerView.Adapter<MyGamesAdapter.V
         var itemApprovePlayers: Button = itemView.findViewById(R.id.mygame_watingapprove_btn)
 
         lateinit var game : Game
+
+        init {
+            itemApprovePlayers.setOnClickListener {
+                openApproveList(game)
+            }
+
+
+        }
+    }
+
+    private fun openApproveList(game : Game){
+        val askToJoinDialog = ApprovePlayerDialogFragment(game)
+        askToJoinDialog.show(fragment.parentFragmentManager, "approvePlayerDialog")
     }
 }

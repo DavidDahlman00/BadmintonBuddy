@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.ktx.firestore
@@ -39,6 +40,29 @@ class SearchUsersFragment : Fragment() {
         recyclerView.adapter = adapter
         recyclerView.adapter!!.notifyDataSetChanged()
         loadUsers()
+
+        searchUsersBinding!!.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+            android.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                Log.d("!!!", "text submit")
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                Log.d("!!!", newText as String)
+                if (newText!=""){
+                    UserObject.userSearchList.clear()
+                    var search = newText?.toLowerCase()
+                    for (user in UserObject.userList){
+                        if(user.name.toLowerCase().contains(search)){
+                           UserObject.userSearchList.add(user)
+                        }
+                    }
+                }
+                recyclerView.adapter!!.notifyDataSetChanged()
+                return true
+            }
+        })
         return view
     }
 
@@ -52,6 +76,7 @@ class SearchUsersFragment : Fragment() {
                     val newItem = document.toObject(User::class.java)
                     if (newItem.id != UserObject.thisUser.id){
                         UserObject.userList.add(newItem)
+                        UserObject.userSearchList.add(newItem)
                     }
                 }
                 recyclerView.adapter!!.notifyDataSetChanged()

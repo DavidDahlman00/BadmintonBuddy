@@ -19,12 +19,12 @@ class SearchUserAdapter : RecyclerView.Adapter<SearchUserAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: SearchUserAdapter.ViewHolder, position: Int) {
-        holder.itemName.text = UserObject.userList[position].name
-        holder.itemEmail.text = UserObject.userList[position].email
+        holder.itemName.text = UserObject.userSearchList[position].name
+        holder.itemEmail.text = UserObject.userSearchList[position].email
     }
 
     override fun getItemCount(): Int {
-        return UserObject.userList.size
+        return UserObject.userSearchList.size
     }
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {

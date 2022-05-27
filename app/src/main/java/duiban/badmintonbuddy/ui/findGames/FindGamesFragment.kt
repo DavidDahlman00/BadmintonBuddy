@@ -1,5 +1,6 @@
 package duiban.badmintonbuddy.ui.findGames
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -22,6 +23,7 @@ class FindGamesFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private var adapter: RecyclerView.Adapter<FindGamesAdapter.ViewHolder>? = null
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,12 +39,13 @@ class FindGamesFragment : Fragment() {
         recyclerView.adapter!!.notifyDataSetChanged()
         return view
     }
+    @SuppressLint("NotifyDataSetChanged")
     private fun loadGamesList() {
         db.collection("game").addSnapshotListener { value, error ->
             if (value != null) {
                 Log.d("message data length", value.size().toString())
                 UserObject.gamesList.clear()
-                for (document in value!!) {
+                for (document in value) {
                     Log.d("message data", document.toString())
                     val newItem = document.toObject(Game::class.java)
                     UserObject.gamesList.add(newItem)

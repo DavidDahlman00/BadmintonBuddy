@@ -18,8 +18,8 @@ class FindGamesAdapter(fragment : Fragment): RecyclerView.Adapter<FindGamesAdapt
     val fragment = fragment
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FindGamesAdapter.ViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.searchgameitem, parent, false)
-        return ViewHolder(v)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.searchgameitem, parent, false)
+        return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: FindGamesAdapter.ViewHolder, position: Int) {
@@ -107,7 +107,7 @@ class FindGamesAdapter(fragment : Fragment): RecyclerView.Adapter<FindGamesAdapt
                 put("id", UserObject.thisUser.id)
                 put("name", UserObject.thisUser.name)
             }
-            return game.intrest.contains(thisPlayersMap)
+            return game.intrest.contains(thisPlayersMap) || game.players.contains(thisPlayersMap)
         }
 
         private fun showHasAlreadyAsked(){

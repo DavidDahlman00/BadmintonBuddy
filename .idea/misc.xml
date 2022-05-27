@@ -9,6 +9,8 @@
         <entry key="app/src/main/res/drawable/ic_visibility_off.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.13858695652173914" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.13858695652173914" />
+        <entry key="app/src/main/res/layout/approve_list_item.xml" value="0.10612968591691996" />
+        <entry key="app/src/main/res/layout/fragment_approve_player_dialog.xml" value="0.10663627152988855" />
         <entry key="app/src/main/res/layout/fragment_ask_to_join_game_dialog.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_create_game_dialog.xml" value="0.14492753623188406" />
         <entry key="app/src/main/res/layout/fragment_find_games.xml" value="0.10663627152988855" />
@@ -17,6 +19,7 @@
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_register.xml" value="0.13451086956521738" />
         <entry key="app/src/main/res/layout/fragment_sign_out_dialog.xml" value="0.13451086956521738" />
+        <entry key="app/src/main/res/layout/my_game_item.xml" value="0.10612968591691996" />
         <entry key="app/src/main/res/layout/searchgameitem.xml" value="0.10612968591691996" />
         <entry key="app/src/main/res/layout/toolbar.xml" value="0.13858695652173914" />
         <entry key="app/src/main/res/menu/login_menu.xml" value="0.21927083333333333" />

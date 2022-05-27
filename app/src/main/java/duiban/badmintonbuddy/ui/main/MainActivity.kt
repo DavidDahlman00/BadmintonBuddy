@@ -13,13 +13,14 @@ import duiban.badmintonbuddy.models.UserObject
 import duiban.badmintonbuddy.myGames.MyGamesFragment
 import duiban.badmintonbuddy.profile.ProfileFragment
 import duiban.badmintonbuddy.ui.findGames.FindGamesFragment
+import duiban.badmintonbuddy.ui.searchUsers.SearchUsersFragment
 
 class MainActivity : AppCompatActivity() {
     private val findGamesFragment = FindGamesFragment()
     private val myGamesFragment = MyGamesFragment()
     private val profileFragment = ProfileFragment()
+    private val searchUserFragment = SearchUsersFragment()
     private lateinit var mainBinding: ActivityMainBinding
-    private val db = Firebase.firestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +34,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.find_games_link -> switchFragment(findGamesFragment)
                 R.id.profile_link -> switchFragment(profileFragment)
                 R.id.my_games_link -> switchFragment(myGamesFragment)
+                R.id.search_user_link -> switchFragment(searchUserFragment)
             }
             true
         }

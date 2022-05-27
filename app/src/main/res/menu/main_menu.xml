@@ -12,4 +12,8 @@
         android:id="@+id/my_games_link"
         android:icon="@drawable/ic_my_games_link"
         android:title="@string/my_games" />
+    <item
+        android:id="@+id/search_user_link"
+        android:icon="@drawable/ic_person_search_link"
+        android:title="Search User" />
 </menu>

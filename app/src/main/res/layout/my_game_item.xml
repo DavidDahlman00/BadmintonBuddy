@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/myitemtimetext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="time" />
+
+    <TextView
+        android:id="@+id/myitemplacetext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/myitemplayer1_btn"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="player1" />
+
+        <Button
+            android:id="@+id/myitemplayer2_btn"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="player2" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        style="?android:attr/buttonBarButtonStyle"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/myitemplayer3_btn"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="player3" />
+
+        <Button
+            android:id="@+id/myitemplayer4_btn"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="player4" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/mygame_watingapprove_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="players are waiting to be accepted" />
+</androidx.appcompat.widget.LinearLayoutCompat>

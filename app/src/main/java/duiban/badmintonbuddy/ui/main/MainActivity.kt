@@ -4,16 +4,22 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import duiban.badmintonbuddy.R
 import duiban.badmintonbuddy.databinding.ActivityMainBinding
+import duiban.badmintonbuddy.models.Game
+import duiban.badmintonbuddy.models.UserObject
 import duiban.badmintonbuddy.myGames.MyGamesFragment
 import duiban.badmintonbuddy.profile.ProfileFragment
 import duiban.badmintonbuddy.ui.findGames.FindGamesFragment
+import duiban.badmintonbuddy.ui.searchUsers.SearchUsersFragment
 
 class MainActivity : AppCompatActivity() {
     private val findGamesFragment = FindGamesFragment()
     private val myGamesFragment = MyGamesFragment()
     private val profileFragment = ProfileFragment()
+    private val searchUserFragment = SearchUsersFragment()
     private lateinit var mainBinding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,12 +27,14 @@ class MainActivity : AppCompatActivity() {
         mainBinding = ActivityMainBinding.inflate(layoutInflater)
         val view = mainBinding.root
         setContentView(view)
-        switchFragment(myGamesFragment)
+        switchFragment(profileFragment)
+
         mainBinding.mainBottomNav.setOnItemSelectedListener { item ->
             when(item.itemId){
                 R.id.find_games_link -> switchFragment(findGamesFragment)
                 R.id.profile_link -> switchFragment(profileFragment)
                 R.id.my_games_link -> switchFragment(myGamesFragment)
+                R.id.search_user_link -> switchFragment(searchUserFragment)
             }
             true
         }

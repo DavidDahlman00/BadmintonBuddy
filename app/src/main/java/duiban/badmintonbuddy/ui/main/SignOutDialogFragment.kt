@@ -8,6 +8,7 @@ import androidx.fragment.app.DialogFragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.firebase.auth.FirebaseAuth
 import duiban.badmintonbuddy.R
 import duiban.badmintonbuddy.databinding.FragmentSignOutDialogBinding
 import duiban.badmintonbuddy.ui.login.LoginActivity
@@ -42,6 +43,7 @@ class SignOutDialogFragment : DialogFragment() {
     }
 
     private fun logOut(context: Context) {
+        FirebaseAuth.getInstance().signOut()
         val bundle = ActivityOptions.makeCustomAnimation(context, android.R.anim.slide_in_left, android.R.anim.slide_out_right).toBundle()
         val intent = Intent(context, LoginActivity::class.java)
         context.startActivity(intent, bundle)

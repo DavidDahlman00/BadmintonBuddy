@@ -3,22 +3,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".myGames.MyGamesFragment">
+    tools:context=".ui.searchUsers.SearchUsersFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/newgamebtn"
+        <SearchView
+            android:id="@+id/searchView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/new_game_btn" />
+            android:queryHint="Enter name"
+            android:iconifiedByDefault="false"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/search_background"
+            android:queryBackground="@android:color/transparent">
+        </SearchView>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/myGameRecycler"
+            android:id="@+id/search_user_recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+
     </LinearLayout>
 </FrameLayout>

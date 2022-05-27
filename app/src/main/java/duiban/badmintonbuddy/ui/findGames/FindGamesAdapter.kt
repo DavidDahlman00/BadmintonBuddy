@@ -107,7 +107,7 @@ class FindGamesAdapter(fragment : Fragment): RecyclerView.Adapter<FindGamesAdapt
                 put("id", UserObject.thisUser.id)
                 put("name", UserObject.thisUser.name)
             }
-            return game.intrest.contains(thisPlayersMap)
+            return game.intrest.contains(thisPlayersMap) || game.players.contains(thisPlayersMap)
         }
 
         private fun showHasAlreadyAsked(){

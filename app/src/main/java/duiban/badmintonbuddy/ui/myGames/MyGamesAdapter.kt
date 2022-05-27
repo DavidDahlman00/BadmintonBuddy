@@ -22,10 +22,11 @@ class MyGamesAdapter(fragment : Fragment): RecyclerView.Adapter<MyGamesAdapter.V
 
     override fun onBindViewHolder(holder: MyGamesAdapter.ViewHolder, position: Int) {
         val filterGames = UserObject.gamesList.
-        filter { it.players[0].getValue("id") == UserObject.thisUser.id }.
+        filter { it.players.any { it.getValue("id") == UserObject.thisUser.id }}.
         filter { it.run { !it.hasTimePast() } }
         val game = filterGames[position]
         holder.game = game
+        holder.itemApprovePlayers.visibility = View.GONE
         holder.itemPlace.text = game.where
         holder.itemTime.text = "${game.year}:${game.month}:${game.day} - ${game.hour}:${game.min}"
         holder.itemPlayer1.text = findPlayerOrEmpty(game, 0)
@@ -37,16 +38,22 @@ class MyGamesAdapter(fragment : Fragment): RecyclerView.Adapter<MyGamesAdapter.V
             holder.itemPlayer3.visibility = View.GONE
             holder.itemPlayer4.visibility = View.GONE
         }
-        if((game.intrest.isEmpty()) || (game.players.size >= game.numPlayers) ) {
-            holder.itemApprovePlayers.visibility = View.GONE
+        if(canAddPlayers(game)) {
+            holder.itemApprovePlayers.visibility = View.VISIBLE
         }
     }
 
     override fun getItemCount(): Int {
         return  UserObject.gamesList.
-        filter { it.players[0].getValue("id") == UserObject.thisUser.id }.
+        filter { it.players.any { it.getValue("id") == UserObject.thisUser.id }}.
         filter { it.run { !it.hasTimePast() } }
             .size
+    }
+
+    private fun canAddPlayers(game : Game) : Boolean {
+        return ((game.players[0].getValue("id") == UserObject.thisUser.id )
+                && (game.intrest.isNotEmpty())
+                && (game.players.size < game.numPlayers))
     }
 
     private fun findPlayerOrEmpty(game: Game,pos : Int) : String{

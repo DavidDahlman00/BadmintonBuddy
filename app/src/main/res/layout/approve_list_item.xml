@@ -17,35 +17,26 @@
             android:layout_height="wrap_content"
             android:text="TextView" />
 
-        <LinearLayout
+        <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/approve_list_item_cancel_btn"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Cancel" />
-
-            <Button
+            <RadioButton
                 android:id="@+id/approve_list_item_denie_btn"
-                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Denie" />
 
-            <Button
+            <RadioButton
                 android:id="@+id/approve_list_item_accept_btn"
-                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Accept" />
-        </LinearLayout>
+        </RadioGroup>
 
 
     </LinearLayout>

@@ -28,7 +28,7 @@ class MyGamesAdapter(fragment : Fragment): RecyclerView.Adapter<MyGamesAdapter.V
         holder.game = game
         holder.itemApprovePlayers.visibility = View.GONE
         holder.itemPlace.text = game.where
-        holder.itemTime.text = "${game.year}:${game.month}:${game.day} - ${game.hour}:${game.min}"
+        holder.itemTime.text = game.timeString()
         holder.itemPlayer1.text = findPlayerOrEmpty(game, 0)
         holder.itemPlayer2.text = findPlayerOrEmpty(game, 1)
         if (game.numPlayers == 4){

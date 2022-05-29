@@ -26,5 +26,9 @@ class CameraGalleryBottomSheetFragment : BottomSheetDialogFragment() {
         return view
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        cameraGalleryBottomSheetBinding = null
+    }
 
 }

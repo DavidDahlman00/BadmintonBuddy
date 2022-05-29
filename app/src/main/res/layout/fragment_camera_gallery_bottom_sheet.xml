@@ -5,10 +5,44 @@
     android:layout_height="match_parent"
     tools:context=".ui.profile.CameraGalleryBottomSheetFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/bottomsheet_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Select Image from"
+            android:layout_marginTop="20dp"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:paddingVertical="20dp"
+            android:orientation="horizontal">
+
+
+            <ImageView
+                android:id="@+id/imageView_camera_bottom_sheet"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginRight="100dp"
+                android:background="@drawable/ic_camera" />
+
+            <ImageView
+                android:id="@+id/imageView_gallery_bottom_sheet"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/ic_gallery_image" />
+        </LinearLayout>
+    </LinearLayout>
 
 </FrameLayout>

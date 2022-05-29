@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import duiban.badmintonbuddy.R
 import duiban.badmintonbuddy.databinding.FragmentProfileBinding
+import duiban.badmintonbuddy.ui.profile.CameraGalleryBottomSheetFragment
 
 
 class ProfileFragment : Fragment() {
@@ -20,6 +21,12 @@ class ProfileFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
         val binding = FragmentProfileBinding.bind(view)
         profileBinding = binding
+        val cameraGalleryBottomSheetFragment = CameraGalleryBottomSheetFragment()
+
+        profileBinding?.profileImage?.setOnClickListener {
+            fragmentManager?.let { it1 -> cameraGalleryBottomSheetFragment.show(it1,"camera_gallery_bottom_sheet") }
+        }
+
         return view
     }
 

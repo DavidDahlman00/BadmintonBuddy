@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/ic_camera.xml" value="0.1585" />
         <entry key="app/src/main/res/drawable/ic_eye.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_logout.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_person.xml" value="0.1" />

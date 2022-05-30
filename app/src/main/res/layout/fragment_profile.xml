@@ -47,7 +47,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:hint="hint" />
+                android:hint="name" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -69,7 +69,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:hint="hint" />
+                android:hint="mail" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

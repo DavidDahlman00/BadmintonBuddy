@@ -33,7 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:layout_marginBottom="20dp"
             android:text="Profile name" />
 
@@ -44,10 +44,11 @@
             android:layout_gravity="center">
 
             <com.google.android.material.textfield.TextInputEditText
+               android:id="@+id/profile_name_text_hint"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:hint="name" />
+                android:textSize="16sp"
+                android:hint="" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -55,9 +56,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:layout_marginBottom="20dp"
-            android:text="Profile name" />
+            android:text="Profile mail" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="320dp"
@@ -66,10 +67,11 @@
             android:layout_gravity="center">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/profile_email_text_hint"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:hint="mail" />
+                android:textSize="16sp"
+                android:hint="" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

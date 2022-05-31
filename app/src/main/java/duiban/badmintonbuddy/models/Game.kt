@@ -16,6 +16,15 @@ class Game( var id: String = "",
         )
     {
 
+        fun timeString(): String {
+            if(min > 9){
+                return "${year}:${month}:${day} - ${hour}:${min}"
+            }else{
+                return "${year}:${month}:${day} - ${hour}:0${min}"
+            }
+
+        }
+
         fun hasTimePast(): Boolean {
         val time_now = Date(System.currentTimeMillis())
         if (time_now.year > year){

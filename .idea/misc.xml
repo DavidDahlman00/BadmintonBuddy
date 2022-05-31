@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/ic_camera.xml" value="0.1585" />
         <entry key="app/src/main/res/drawable/ic_eye.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_gallery_image.xml" value="0.1375" />
         <entry key="app/src/main/res/drawable/ic_logout.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_person.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_person_link.xml" value="0.1" />
@@ -15,6 +17,7 @@
         <entry key="app/src/main/res/layout/approve_list_item.xml" value="0.10612968591691996" />
         <entry key="app/src/main/res/layout/fragment_approve_player_dialog.xml" value="0.10663627152988855" />
         <entry key="app/src/main/res/layout/fragment_ask_to_join_game_dialog.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_camera_gallery_bottom_sheet.xml" value="0.12708333333333333" />
         <entry key="app/src/main/res/layout/fragment_create_game_dialog.xml" value="0.14492753623188406" />
         <entry key="app/src/main/res/layout/fragment_find_games.xml" value="0.10663627152988855" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.1" />

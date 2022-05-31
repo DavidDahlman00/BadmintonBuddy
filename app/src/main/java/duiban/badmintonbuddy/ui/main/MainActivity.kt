@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         mainBinding = ActivityMainBinding.inflate(layoutInflater)
         val view = mainBinding.root
         setContentView(view)
-        switchFragment(profileFragment)
+        switchFragment(findGamesFragment)
 
         mainBinding.mainBottomNav.setOnItemSelectedListener { item ->
             when(item.itemId){
@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
             true
         }
         mainBinding.toptoolbar.logout.setOnClickListener {
-            val signOutDialog = SignOutDialogFragment()
+            val signOutDialog = SignOutDialogFragment(this)
             signOutDialog.show(supportFragmentManager, "SignOutDialogFragment")
             Log.d("222", "logout")
         }

@@ -93,11 +93,10 @@ class LoginFragment : Fragment() {
                             UserObject.thisUser = userdata
                             Log.d("111", UserObject.thisUser.email)
                         }
-
                     }
                     Log.d("TAG", "signInWithEmail:success")
-                    gotoMainScreen(this.requireContext())
                 }
+                gotoMainScreen(this.requireContext())
             }
         }
     }

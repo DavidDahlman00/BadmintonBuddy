@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
             true
         }
         mainBinding.toptoolbar.logout.setOnClickListener {
-            val signOutDialog = SignOutDialogFragment()
+            val signOutDialog = SignOutDialogFragment(this)
             signOutDialog.show(supportFragmentManager, "SignOutDialogFragment")
             Log.d("222", "logout")
         }

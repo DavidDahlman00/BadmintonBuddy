@@ -11,12 +11,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import duiban.badmintonbuddy.R
 import duiban.badmintonbuddy.databinding.FragmentProfileBinding
-import duiban.badmintonbuddy.models.UserObject
 import duiban.badmintonbuddy.ui.profile.CameraGalleryBottomSheetFragment
 
 
@@ -47,6 +45,7 @@ class ProfileFragment : Fragment() {
         return view
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,

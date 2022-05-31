@@ -12,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import androidx.core.content.ContentProviderCompat.requireContext
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
@@ -86,12 +87,14 @@ class LoginFragment : Fragment() {
                     if (e != null) {
                         Log.d("login", "data failed to load")
                     }
+
                     if (document != null && document.exists()) {
                         val userdata = document.toObject(User::class.java)
                         Log.d("login", userdata.toString())
                         if (userdata != null) {
                             UserObject.thisUser = userdata
                             Log.d("111", UserObject.thisUser.email)
+                            Log.d("111profileImage", UserObject.thisUser.profileImage)
                         }
                     }
                     Log.d("TAG", "signInWithEmail:success")

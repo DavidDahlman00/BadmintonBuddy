@@ -11,12 +11,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
 import duiban.badmintonbuddy.R
 import duiban.badmintonbuddy.databinding.FragmentProfileBinding
+import duiban.badmintonbuddy.models.User
+import duiban.badmintonbuddy.models.UserObject
 import duiban.badmintonbuddy.ui.profile.CameraGalleryBottomSheetFragment
-
+import java.io.ByteArrayOutputStream
+import java.util.*
+import com.squareup.picasso.Picasso
 
 class ProfileFragment : Fragment() {
 
@@ -28,6 +36,10 @@ class ProfileFragment : Fragment() {
 
     private var profileBinding: FragmentProfileBinding?= null
     private var takenImage: Bitmap? = null
+    private val db = Firebase.firestore
+    lateinit var uuid: String
+    private lateinit var name: EditText
+    private lateinit var email: EditText
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,8 +50,26 @@ class ProfileFragment : Fragment() {
         profileBinding = binding
         val cameraGalleryBottomSheetFragment = CameraGalleryBottomSheetFragment(this)
 
+        name = profileBinding?.profileEditName!!
+        email = profileBinding?.profileEditEmail!!
+
+
+        if(UserObject.thisUser.profileImage == ""){
+            Log.d("tag", "load ???")
+            profileBinding?.profileImage?.setImageResource(R.drawable.ic_camera)
+            Log.d("tag", "load standart")
+        }else{
+            Log.d("tag", "load else")
+           Picasso.get().load(UserObject.thisUser.profileImage).into(profileBinding?.profileImage)
+            Log.d("tag", "load picasso")
+        }
+
         profileBinding?.profileImage?.setOnClickListener {
             fragmentManager?.let { it1 -> cameraGalleryBottomSheetFragment.show(it1,"camera_gallery_bottom_sheet") }
+        }
+
+        profileBinding?.updateProfileButton?.setOnClickListener {
+            updateUserToDatabase()
         }
 
         return view
@@ -94,6 +124,49 @@ class ProfileFragment : Fragment() {
         val intent = Intent(Intent.ACTION_PICK)
         intent.type = "image/*"
         startActivityForResult(intent, IMAGE_REQUEST_CODE)
+    }
+
+
+    private fun updateUserToDatabase(){
+        uuid = UUID.randomUUID().toString()
+        val baos = ByteArrayOutputStream()
+        val storageRef = FirebaseStorage.getInstance()
+            .reference.child(UserObject.thisUser.id).child("ProfileImage/${UserObject.thisUser.id}")
+
+        if (takenImage == null) return
+
+        takenImage!!.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+        val data = baos.toByteArray()
+        storageRef.delete().addOnSuccessListener {
+
+        val uploadTask = storageRef.putBytes(data)
+            //.child("images/" + UserObject.thisUser.id).putBytes(data)
+        uploadTask.addOnFailureListener {
+            Log.d("!!!", "on failure  $it")
+        }.addOnSuccessListener { taskSnapshot ->
+            val url = taskSnapshot.metadata?.reference?.downloadUrl
+
+
+            url?.addOnSuccessListener {
+                val link = it
+                Log.d("url", "$it")
+                val imageLink = link.toString()
+                Log.d("Photo Link", "$imageLink")
+
+                val newUser = User(
+                    id = UserObject.thisUser.id,
+                    name = name.text.toString(),
+                    email = email.text.toString(),
+                    password = UserObject.thisUser.password,
+                    profileImage = imageLink
+                )
+
+                db.collection("users").document(UserObject.thisUser.id).set(newUser)
+
+                Log.d("USER UPDATE", "to the database, good")
+            }
+            }
+        }
     }
 
     override fun onDestroyView() {

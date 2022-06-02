@@ -2,20 +2,26 @@
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="5dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingHorizontal="20dp"
+    android:paddingTop="10dp">
 
 
     <TextView
         android:id="@+id/myitemtimetext"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:gravity="center"
+
         android:text="time" />
 
     <TextView
         android:id="@+id/myitemplacetext"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="20sp"
         android:text="TextView" />
 
     <LinearLayout
@@ -41,9 +47,9 @@
     </LinearLayout>
 
     <LinearLayout
+        style="?android:attr/buttonBarButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        style="?android:attr/buttonBarButtonStyle"
         android:orientation="horizontal">
 
         <Button
@@ -65,7 +71,7 @@
 
     <Button
         android:id="@+id/mygame_watingapprove_btn"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="players are waiting to be accepted" />
 </androidx.appcompat.widget.LinearLayoutCompat>

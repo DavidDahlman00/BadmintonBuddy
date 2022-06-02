@@ -1,5 +1,6 @@
 package duiban.badmintonbuddy.ui.myGames
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import duiban.badmintonbuddy.R
 import duiban.badmintonbuddy.models.Game
 import duiban.badmintonbuddy.models.UserObject
+import java.time.LocalDate
+import java.util.*
 
 class MyGamesAdapter(fragment : Fragment): RecyclerView.Adapter<MyGamesAdapter.ViewHolder>() {
 
@@ -22,9 +25,13 @@ class MyGamesAdapter(fragment : Fragment): RecyclerView.Adapter<MyGamesAdapter.V
 
     override fun onBindViewHolder(holder: MyGamesAdapter.ViewHolder, position: Int) {
         val filterGames = UserObject.gamesList.
-        filter { it.players.any { it.getValue("id") == UserObject.thisUser.id }}.
-        filter { it.run { !it.hasTimePast() } }
+        filter { (it.players.any { it.getValue("id") == UserObject.thisUser.id })&&(!it.hasTimePast())}
+        val time_now = Date(System.currentTimeMillis())
         val game = filterGames[position]
+        Log.d("has game past", game.hasTimePast().toString())
+        Log.d("year", "${time_now.year},  , ${game.year}")
+        Log.d("month", "${time_now.month},  , ${game.month}")
+        Log.d("day", "${LocalDate.now().dayOfMonth},  , ${game.day}")
         holder.game = game
         holder.itemApprovePlayers.visibility = View.GONE
         holder.itemPlace.text = game.where
@@ -45,8 +52,7 @@ class MyGamesAdapter(fragment : Fragment): RecyclerView.Adapter<MyGamesAdapter.V
 
     override fun getItemCount(): Int {
         return  UserObject.gamesList.
-        filter { it.players.any { it.getValue("id") == UserObject.thisUser.id }}.
-        filter { it.run { !it.hasTimePast() } }
+        filter { (it.players.any { it.getValue("id") == UserObject.thisUser.id })&&(!it.hasTimePast())}
             .size
     }
 

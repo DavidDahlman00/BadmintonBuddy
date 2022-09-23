@@ -10,7 +10,8 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="-114dp">
+        android:background="@color/color3"
+       >
 
 
         <ImageView
@@ -19,7 +20,7 @@
             android:layout_height="200dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="50dp"
-            android:background="@mipmap/ic_launcher_foreground"
+            android:background="@drawable/badminton_image"
              />
 
         <LinearLayout
@@ -33,6 +34,7 @@
                 android:layout_marginLeft="80dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/color1"
                 android:text="Email" />
 
             <LinearLayout
@@ -44,7 +46,6 @@
                     android:id="@+id/mail_imageView"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-
                     android:background="@drawable/ic_email" />
 
                 <EditText
@@ -75,6 +76,7 @@
                 android:layout_marginLeft="80dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/color1"
                 android:text="Password" />
 
             <LinearLayout
@@ -114,6 +116,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="?android:attr/buttonBarButtonStyle"
+            android:background="@color/color3"
             android:text="login" />
 
     </LinearLayout>

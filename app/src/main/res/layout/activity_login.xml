@@ -12,8 +12,9 @@
         android:id="@+id/loginFragmentContainerView"
         android:name="duiban.badmintonbuddy.ui.login.LoginFragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBaseline_toTopOf="parent" />
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/login_bottom_nav"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/login_bottom_nav"

@@ -7,9 +7,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import dagger.hilt.android.AndroidEntryPoint
 import duiban.badmintonbuddy.R
 import duiban.badmintonbuddy.ui.login.LoginActivity
 
+@AndroidEntryPoint
 class StartActivity : AppCompatActivity() {
     private val screenShownInMiliSeconds : Long = 1500
     override fun onCreate(savedInstanceState: Bundle?) {

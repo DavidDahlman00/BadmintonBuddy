@@ -5,4 +5,6 @@ object UserObject {
    var gamesList : MutableList<Game> = mutableListOf()
    var userList : MutableList<User> = mutableListOf()
    var userSearchList : MutableList<User> = mutableListOf()
+
+
 }

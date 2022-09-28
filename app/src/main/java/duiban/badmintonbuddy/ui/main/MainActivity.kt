@@ -4,16 +4,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import duiban.badmintonbuddy.R
 import duiban.badmintonbuddy.databinding.ActivityMainBinding
-import duiban.badmintonbuddy.models.Game
-import duiban.badmintonbuddy.models.UserObject
 import duiban.badmintonbuddy.myGames.MyGamesFragment
 import duiban.badmintonbuddy.profile.ProfileFragment
 import duiban.badmintonbuddy.ui.findGames.FindGamesFragment
 import duiban.badmintonbuddy.ui.searchUsers.SearchUsersFragment
+
 
 class MainActivity : AppCompatActivity() {
     private val findGamesFragment = FindGamesFragment()

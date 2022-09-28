@@ -14,17 +14,13 @@ import android.view.ViewGroup
 import android.widget.EditText
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.FirebaseStorage
+import androidx.fragment.app.viewModels
 import duiban.badmintonbuddy.R
 import duiban.badmintonbuddy.databinding.FragmentProfileBinding
-import duiban.badmintonbuddy.models.User
 import duiban.badmintonbuddy.models.UserObject
 import duiban.badmintonbuddy.ui.profile.CameraGalleryBottomSheetFragment
-import java.io.ByteArrayOutputStream
-import java.util.*
 import com.squareup.picasso.Picasso
+import duiban.badmintonbuddy.ui.profile.ProfileViewModel
 
 class ProfileFragment : Fragment() {
 
@@ -34,10 +30,10 @@ class ProfileFragment : Fragment() {
         private const val IMAGE_REQUEST_CODE = 3
     }
 
+    private val viewModel: ProfileViewModel by viewModels()
     private var profileBinding: FragmentProfileBinding?= null
     private var takenImage: Bitmap? = null
-    private val db = Firebase.firestore
-    lateinit var uuid: String
+
     private lateinit var name: EditText
     private lateinit var email: EditText
 
@@ -69,7 +65,14 @@ class ProfileFragment : Fragment() {
         }
 
         profileBinding?.updateProfileButton?.setOnClickListener {
-            updateUserToDatabase()
+           if (name.text.toString().isNotBlank() && email.text.toString().isNotBlank()){
+               viewModel.updateUserToDatabase(
+                   name.text.toString(),
+                   email.text.toString())
+           }else{
+               Log.d("toDo", "errorMessage")
+           }
+
         }
 
         return view
@@ -127,47 +130,7 @@ class ProfileFragment : Fragment() {
     }
 
 
-    private fun updateUserToDatabase(){
-        uuid = UUID.randomUUID().toString()
-        val baos = ByteArrayOutputStream()
-        val storageRef = FirebaseStorage.getInstance()
-            .reference.child(UserObject.thisUser.id).child("ProfileImage/${UserObject.thisUser.id}")
 
-        if (takenImage == null) return
-
-        takenImage!!.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-        val data = baos.toByteArray()
-        storageRef.delete().addOnSuccessListener {
-
-        val uploadTask = storageRef.putBytes(data)
-            //.child("images/" + UserObject.thisUser.id).putBytes(data)
-        uploadTask.addOnFailureListener {
-            Log.d("!!!", "on failure  $it")
-        }.addOnSuccessListener { taskSnapshot ->
-            val url = taskSnapshot.metadata?.reference?.downloadUrl
-
-
-            url?.addOnSuccessListener {
-                val link = it
-                Log.d("url", "$it")
-                val imageLink = link.toString()
-                Log.d("Photo Link", "$imageLink")
-
-                val newUser = User(
-                    id = UserObject.thisUser.id,
-                    name = name.text.toString(),
-                    email = email.text.toString(),
-                    password = UserObject.thisUser.password,
-                    profileImage = imageLink
-                )
-
-                db.collection("users").document(UserObject.thisUser.id).set(newUser)
-
-                Log.d("USER UPDATE", "to the database, good")
-            }
-            }
-        }
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()

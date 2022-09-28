@@ -4,6 +4,7 @@
     <corners
         android:radius="16dp"/>
     <stroke
-        android:color="@color/cardview_shadow_start_color"
+        android:color="@color/color2"
         android:width="4dp" />
+
 </shape>

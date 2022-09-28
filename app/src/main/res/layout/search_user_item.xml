@@ -34,13 +34,23 @@
                 android:text="TextView" />
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/search_item_image"
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_gravity="right"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/ic_person" />
+            app:cardCornerRadius="8dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dp"
+            android:visibility="visible"
+            >
+
+            <ImageView
+                android:id="@+id/search_item_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/ic_person"
+                />
+        </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

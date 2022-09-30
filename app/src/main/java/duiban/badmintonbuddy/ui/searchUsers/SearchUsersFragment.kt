@@ -52,9 +52,9 @@ class SearchUsersFragment : Fragment() {
                 Log.d("!!!", newText as String)
                 if (newText!=""){
                     UserObject.userSearchList.clear()
-                    var search = newText?.toLowerCase()
+                    val search = newText?.lowercase()
                     for (user in UserObject.userList){
-                        if(user.name.toLowerCase().contains(search)){
+                        if(search?.let { user.name.lowercase().contains(it) }!!){
                            UserObject.userSearchList.add(user)
                         }
                     }

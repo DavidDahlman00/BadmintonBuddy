@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
@@ -57,11 +58,18 @@ class LoginFragment : Fragment() {
             showPassword = !showPassword
         }
 
+        viewModel.errorStatus.observe(viewLifecycleOwner) { result ->
+            if (!result.successful) {
+                binding.loginError.text = result.errorMessage
+            }
+        }
+        binding.loginError.text = viewModel.errorStatus.value?.errorMessage
+
         binding.loginButton.setOnClickListener {
             viewModel.login(
                 this.requireContext(),
-                email.text.trim { it <= ' ' }.toString(),
-                password.text.trim { it <= ' ' }.toString()
+                email.text.toString(),
+                password.text.toString()
             )
         }
         return view

@@ -11,4 +11,5 @@
     <color name="color1">#054007</color>
     <color name="color2">#C3EDC5</color>
     <color name="color3">#F0F6F0</color>
+    <color name="error_color">#CF453B</color>
 </resources>

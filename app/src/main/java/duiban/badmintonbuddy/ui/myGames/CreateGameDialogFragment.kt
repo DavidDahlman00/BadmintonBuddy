@@ -17,6 +17,7 @@ import duiban.badmintonbuddy.R
 import duiban.badmintonbuddy.databinding.FragmentCreateGameDialogBinding
 import duiban.badmintonbuddy.models.Game
 import duiban.badmintonbuddy.models.UserObject
+import duiban.badmintonbuddy.models.ValidationResult
 import java.util.*
 import kotlin.collections.HashMap
 
@@ -37,7 +38,7 @@ class CreateGameDialogFragment :  DialogFragment(), DatePickerDialog.OnDateSetLi
     private var savedHour = 0
     private var savedMinute = 0
 
-    private var numberOfPlayers = 2
+    private var numberOfPlayers: Int? = null
 
 
     override fun onCreateView(
@@ -70,40 +71,55 @@ class CreateGameDialogFragment :  DialogFragment(), DatePickerDialog.OnDateSetLi
             dismiss()
         }
     }
-
-    private fun createGame(){
-        createGameDialogBinding?.createGameBtn?.setOnClickListener {
-            val playerList = mutableListOf<HashMap<String, String>>()
-            val thisPlayerMap = HashMap<String, String>()
-            with(thisPlayerMap){
-                put("id", UserObject.thisUser.id)
-                put("name", UserObject.thisUser.name)
-            }
-            playerList.add(thisPlayerMap)
-
-            val where = createGameDialogBinding?.editTextTextPlace?.text.toString()
-
-
-            Log.d("QQQ", "did send game???")
-            val gameRef = db.collection("game").document()
-
-            val newGame = Game(
-                id = gameRef.id,
-                where = where,
-                year = savedYear,
-                month = savedMonth,
-                day = savedDay,
-                hour = savedHour,
-                min = savedMinute,
-                numPlayers = numberOfPlayers,
-                players = playerList
-            )
-            gameRef.set(newGame)
-            dismiss()
-        }
+    private fun validNewGame(game: Game): ValidationResult{
+        if (game.where.isBlank())
+            return ValidationResult(false, "Please add location")
+        if (game.hasTimePast())
+            return ValidationResult(false, "The selected time has already past")
+        return ValidationResult(true, "none")
     }
 
-    private fun getDateTimeCalander() {
+    private fun createGame(){
+
+            createGameDialogBinding?.createGameBtn?.setOnClickListener {
+                val playerList = mutableListOf<HashMap<String, String>>()
+                val thisPlayerMap = HashMap<String, String>()
+                with(thisPlayerMap){
+                    put("id", UserObject.thisUser.id)
+                    put("name", UserObject.thisUser.name)
+                }
+                playerList.add(thisPlayerMap)
+
+                val where = createGameDialogBinding?.editTextTextPlace?.text.toString()
+                Log.d("QQQ", "did send game???")
+                val gameRef = db.collection("game").document()
+
+                val newGame = Game(
+                    id = gameRef.id,
+                    where = where,
+                    year = savedYear,
+                    month = savedMonth,
+                    day = savedDay,
+                    hour = savedHour,
+                    min = savedMinute,
+                    numPlayers = numberOfPlayers ?: 2,
+                    players = playerList
+                )
+
+                val validation = validNewGame(newGame)
+
+                if (validation.successful){
+                    gameRef.set(newGame)
+                    dismiss()
+                }else{
+                    createGameDialogBinding?.createGameErrorText?.text = validation.errorMessage
+                }
+            }
+
+
+    }
+
+    private fun getDateTimeCalendar() {
         val cal : Calendar = Calendar.getInstance()
         day = cal.get(Calendar.DAY_OF_MONTH)
         month = cal.get(Calendar.MONTH)
@@ -115,7 +131,7 @@ class CreateGameDialogFragment :  DialogFragment(), DatePickerDialog.OnDateSetLi
 
     private fun pickDate() {
         createGameDialogBinding?.btnTimePicker?.setOnClickListener {
-            getDateTimeCalander()
+            getDateTimeCalendar()
             DatePickerDialog(this.requireContext(),this , year, month, day).show()
         }
     }
@@ -125,7 +141,7 @@ class CreateGameDialogFragment :  DialogFragment(), DatePickerDialog.OnDateSetLi
         savedMonth = month + 1
         savedYear = year
 
-        getDateTimeCalander()
+        getDateTimeCalendar()
 
         TimePickerDialog(this.requireContext(),this , hour, minute, true).show()
 

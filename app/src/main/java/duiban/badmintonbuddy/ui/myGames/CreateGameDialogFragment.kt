@@ -51,11 +51,11 @@ class CreateGameDialogFragment :  DialogFragment(), DatePickerDialog.OnDateSetLi
         cancel()
         createGame()
         pickDate()
-        selectNumberOfplayers()
+        selectNumberPlayers()
         return view
     }
 
-    private fun selectNumberOfplayers() {
+    private fun selectNumberPlayers() {
         createGameDialogBinding?.radioButton2player?.setOnClickListener {
             numberOfPlayers = 2
         }

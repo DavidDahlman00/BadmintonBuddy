@@ -17,7 +17,6 @@ class FindGamesFragment: Fragment() {
 
     private val viewModel: FindGameViewModel by viewModels()
     private var findGamesBinding: FragmentFindGamesBinding?=null
-   // private var db = FirebaseFirestore.getInstance()
     private lateinit var recyclerView: RecyclerView
     private var adapter: RecyclerView.Adapter<FindGamesAdapter.ViewHolder>? = null
 
@@ -29,9 +28,9 @@ class FindGamesFragment: Fragment() {
         val view = inflater.inflate(R.layout.fragment_find_games, container, false)
         val binding = FragmentFindGamesBinding.bind(view)
         findGamesBinding = binding
-        viewModel.loadGamesList()
 
         recyclerView = findGamesBinding!!.findgamerecycler
+        viewModel.loadGamesList()
         recyclerView.layoutManager = LinearLayoutManager(this.requireContext())
         adapter = FindGamesAdapter(this)
         recyclerView.adapter = adapter

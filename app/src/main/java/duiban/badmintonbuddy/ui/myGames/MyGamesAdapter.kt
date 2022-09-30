@@ -85,8 +85,6 @@ class MyGamesAdapter(fragment : Fragment): RecyclerView.Adapter<MyGamesAdapter.V
             itemApprovePlayers.setOnClickListener {
                 openApproveList(game)
             }
-
-
         }
     }
 

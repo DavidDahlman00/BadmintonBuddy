@@ -28,30 +28,36 @@ class MyGamesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_my_games, container, false)
+
+        val view = inflater.inflate(R.layout.fragment_my_games,
+            container,
+            false)
+
         val binding = FragmentMyGamesBinding.bind(view)
         myGamesBinding = binding
-                loadGamesList()
+
                 recyclerView = myGamesBinding!!.myGameRecycler
                 recyclerView.layoutManager = LinearLayoutManager(this.requireContext())
                 adapter = MyGamesAdapter(this)
                 recyclerView.adapter = adapter
+                loadGamesList()
                 recyclerView.adapter!!.notifyDataSetChanged()
 
                 myGamesBinding?.newgamebtn?.setOnClickListener {
             val createGameDialogFragment = CreateGameDialogFragment()
             createGameDialogFragment.show(parentFragmentManager, "createGameDialogFragment")
         }
+
         return view
     }
 
     @SuppressLint("NotifyDataSetChanged")
     private fun loadGamesList() {
-        db.collection("game").addSnapshotListener { value, error ->
+        db.collection("game").addSnapshotListener { value, _ ->
             if (value != null) {
                 Log.d("message data length", value.size().toString())
                 UserObject.gamesList.clear()
-                for (document in value!!) {
+                for (document in value) {
                     Log.d("message data", document.toString())
                     val newItem = document.toObject(Game::class.java)
                     UserObject.gamesList.add(newItem)

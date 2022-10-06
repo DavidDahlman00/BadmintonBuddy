@@ -4,29 +4,39 @@ import android.app.ActivityOptions
 import android.content.Context
 import android.content.Intent
 import android.util.Log
+
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import duiban.badmintonbuddy.models.User
 import duiban.badmintonbuddy.models.UserObject
 import duiban.badmintonbuddy.models.ValidationResult
 import duiban.badmintonbuddy.ui.main.MainActivity
-import kotlinx.coroutines.flow.MutableStateFlow
+import duiban.badmintonbuddy.ui.start.TestFire
+import javax.inject.Inject
 
-class LoginViewModel: ViewModel() {
+@HiltViewModel
+class LoginViewModel @Inject constructor(
+    private val fireStore: FirebaseFirestore
+)
+: ViewModel() {
 
     private  val auth: FirebaseAuth = Firebase.auth
-    private val db = Firebase.firestore
+    //private val db = Firebase.firestore
 
     private val _errorStatus = MutableLiveData<ValidationResult>()
     val errorStatus: LiveData<ValidationResult> = _errorStatus
 
     init {
         _errorStatus.value = ValidationResult(true, "")
+
+       // Log.d("AAA", bajsstring)
     }
 
     private fun gotoMainScreen(context: Context) {
@@ -78,7 +88,7 @@ class LoginViewModel: ViewModel() {
                     put("profileImage", "")
                 }
 
-                db.collection("users")
+                fireStore.collection("users")
                     .document(userID)
                     .set(newUser)
                     .addOnSuccessListener {
@@ -101,7 +111,7 @@ class LoginViewModel: ViewModel() {
             if (task.isSuccessful) {
                 val userID = task.result?.user?.uid.toString()
                 Log.d("test22", userID)
-                db.collection("users").document(userID).addSnapshotListener { document, e ->
+                fireStore.collection("users").document(userID).addSnapshotListener { document, e ->
                     if (e != null) {
                         Log.d("login", "data failed to load")
                     }

@@ -13,22 +13,24 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import dagger.hilt.android.AndroidEntryPoint
 import duiban.badmintonbuddy.R
 import duiban.badmintonbuddy.databinding.FragmentLoginBinding
 import duiban.badmintonbuddy.models.User
 import duiban.badmintonbuddy.models.UserObject
 import duiban.badmintonbuddy.ui.main.MainActivity
 
-
+@AndroidEntryPoint
 class LoginFragment : Fragment() {
 
-    private val viewModel : LoginViewModel by viewModels()
+    private val viewModel : LoginViewModel by activityViewModels()
     private var loginFragmentLoginBinding: FragmentLoginBinding? = null
     private lateinit var email: EditText
     private lateinit var password: EditText

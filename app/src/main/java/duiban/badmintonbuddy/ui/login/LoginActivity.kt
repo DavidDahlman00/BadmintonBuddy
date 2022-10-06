@@ -2,11 +2,19 @@ package duiban.badmintonbuddy.ui.login
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
+import dagger.hilt.android.AndroidEntryPoint
 import duiban.badmintonbuddy.R
 import duiban.badmintonbuddy.databinding.ActivityLoginBinding
+import duiban.badmintonbuddy.ui.start.TestFire
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
+
+    //private val testFire = testFire
+    @Inject lateinit var testFire: TestFire
     private val loginFragment = LoginFragment()
     private val registerFragment = RegisterFragment()
     private lateinit var loginBinding: ActivityLoginBinding
@@ -15,6 +23,8 @@ class LoginActivity : AppCompatActivity() {
         loginBinding = ActivityLoginBinding.inflate(layoutInflater)
         val view = loginBinding.root
         setContentView(view)
+
+       Log.d("AAA", testFire.doBajs())
 
         loginBinding.loginBottomNav.setOnItemSelectedListener { item ->
 

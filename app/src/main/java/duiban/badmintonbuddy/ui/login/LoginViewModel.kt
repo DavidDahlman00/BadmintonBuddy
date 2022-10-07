@@ -9,34 +9,27 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import duiban.badmintonbuddy.models.User
 import duiban.badmintonbuddy.models.UserObject
 import duiban.badmintonbuddy.models.ValidationResult
 import duiban.badmintonbuddy.ui.main.MainActivity
-import duiban.badmintonbuddy.ui.start.TestFire
 import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
+    private val auth: FirebaseAuth,
     private val fireStore: FirebaseFirestore
 )
 : ViewModel() {
 
-    private  val auth: FirebaseAuth = Firebase.auth
-    //private val db = Firebase.firestore
 
     private val _errorStatus = MutableLiveData<ValidationResult>()
     val errorStatus: LiveData<ValidationResult> = _errorStatus
 
     init {
         _errorStatus.value = ValidationResult(true, "")
-
-       // Log.d("AAA", bajsstring)
     }
 
     private fun gotoMainScreen(context: Context) {
@@ -67,18 +60,12 @@ class LoginViewModel @Inject constructor(
         val username = userName.trim{it <= ' '}
         val email = email.trim{it <= ' '}
         val password = password.trim{it <= ' '}
-        Log.d("???","test register")
-        Log.d("test22", username )
-        Log.d("test22", email )
-        Log.d("test22", password )
+
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
             Log.d("111", task.toString())
             if (task.isSuccessful) {
                 val userID = task.result?.user?.uid.toString()
-                Log.d("test22", userID )
-                Log.d("test22", username )
-                Log.d("test22", email )
-                Log.d("test22", password )
+
                 val newUser = hashMapOf<String, Any>()
                 with(newUser) {
                     put("id", userID)
